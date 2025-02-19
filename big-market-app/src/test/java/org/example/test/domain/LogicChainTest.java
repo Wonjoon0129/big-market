@@ -9,7 +9,6 @@ import org.example.domain.strategy.service.armory.IStrategyArmory;
 import org.example.domain.strategy.service.rule.chain.ILogicChain;
 import org.example.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
 import org.example.domain.strategy.service.rule.chain.impl.RuleWeightLogicChain;
-import org.example.domain.strategy.service.rule.filter.impl.RuleLockLogicFilter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
