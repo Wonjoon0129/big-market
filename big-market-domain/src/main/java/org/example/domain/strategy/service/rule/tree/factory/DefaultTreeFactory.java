@@ -51,6 +51,9 @@ public class DefaultTreeFactory {
         private Integer awardId;
         /** 抽奖奖品规则 */
         private String awardRuleValue;
+        /** 奖品顺序号 */
+        private Integer sort;
+
     }
 
 
