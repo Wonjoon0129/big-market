@@ -1,9 +1,8 @@
-package org.example.test.domain;
+package org.example.test.domain.strategy;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.domain.strategy.service.armory.IStrategyArmory;
 import org.example.domain.strategy.service.armory.IStrategyDispatch;
-import org.example.domain.strategy.service.armory.StrategyArmoryDispatch;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

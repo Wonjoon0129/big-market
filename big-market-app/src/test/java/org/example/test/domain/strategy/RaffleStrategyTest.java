@@ -1,4 +1,4 @@
-package org.example.test.domain;
+package org.example.test.domain.strategy;
 
 import org.example.domain.strategy.model.entity.RaffleAwardEntity;
 import org.example.domain.strategy.model.entity.RaffleFactorEntity;
