@@ -1,6 +1,6 @@
 package org.example.trigger.listener;
 
-import org.example.domain.activity.service.ISkuStock;
+import org.example.domain.activity.service.IRaffleActivitySkuStockService;
 import org.example.types.event.BaseEvent;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.TypeReference;
@@ -25,7 +25,7 @@ public class ActivitySkuStockZeroCustomer {
     private String topic;
 
     @Resource
-    private ISkuStock skuStock;
+    private IRaffleActivitySkuStockService skuStock;
 
     @RabbitListener(queuesToDeclare = @Queue(value = "activity_sku_stock_zero"))
     public void listener(String message) {
