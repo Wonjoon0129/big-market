@@ -92,7 +92,7 @@ services:
         condition: service_healthy
 
   rabbitmq:
-    image: rabbitmq:3.12.9
+    image: rabbitmq:latest
     container_name: rabbitmq
     restart: always
     ports:
@@ -104,6 +104,8 @@ services:
     command: rabbitmq-server
     volumes:
       - ./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
+
+
 
 networks:
   my-network:

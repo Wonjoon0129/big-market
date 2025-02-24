@@ -54,7 +54,7 @@ public class RaffleOrderTest {
      */
     @Test
     public void test_createSkuRechargeOrder() throws InterruptedException {
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 23; i++) {
             try {
                 SkuRechargeEntity skuRechargeEntity = new SkuRechargeEntity();
                 skuRechargeEntity.setUserId("xiaofuge");
