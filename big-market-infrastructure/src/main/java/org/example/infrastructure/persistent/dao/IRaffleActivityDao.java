@@ -1,5 +1,6 @@
 package org.example.infrastructure.persistent.dao;
 
+import cn.bugstack.middleware.db.router.annotation.DBRouter;
 import org.apache.ibatis.annotations.Mapper;
 import org.example.infrastructure.persistent.po.RaffleActivity;
 
@@ -13,4 +14,7 @@ public interface IRaffleActivityDao {
 
     RaffleActivity queryRaffleActivityByActivityId(Long activityId);
 
+    Long queryStrategyIdByActivityId(Long activityId);
+
+    Long queryActivityIdByStrategyId(Long strategyId);
 }
