@@ -57,6 +57,7 @@ public abstract class AbstractRaffleActivityAccountQuota extends RaffleActivityA
         return createQuotaOrderAggregate.getActivityOrderEntity().getOrderId();
     }
 
+
     protected abstract void doSaveOrder(CreateQuotaOrderAggregate createQuotaOrderAggregate);
 
     protected abstract CreateQuotaOrderAggregate buildOrderAggregate(SkuRechargeEntity skuRechargeEntity, ActivitySkuEntity activitySkuEntity, ActivityEntity activityEntity, ActivityCountEntity activityCountEntity);
