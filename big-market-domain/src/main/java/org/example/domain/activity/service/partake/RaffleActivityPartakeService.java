@@ -36,6 +36,7 @@ public class RaffleActivityPartakeService extends AbstractRaffleActivityPartake 
         // 构建订单
         UserRaffleOrderEntity userRaffleOrder = new UserRaffleOrderEntity();
         userRaffleOrder.setUserId(userId);
+        userRaffleOrder.setEndDateTime(activityEntity.getEndDateTime());
         userRaffleOrder.setActivityId(activityId);
         userRaffleOrder.setActivityName(activityEntity.getActivityName());
         userRaffleOrder.setStrategyId(activityEntity.getStrategyId());

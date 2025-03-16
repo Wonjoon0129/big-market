@@ -1,5 +1,7 @@
 package org.example.domain.strategy.service.armory;
 
+import java.util.Date;
+
 /**
  * @ClassName IStrategyDispath
  * @Description 策略抽奖调度
@@ -20,6 +22,6 @@ public interface IStrategyDispatch {
      * @param awardId    奖品ID
      * @return 扣减结果
      */
-    Boolean subtractionAwardStock(Long strategyId, Integer awardId);
+    Boolean subtractionAwardStock(Long strategyId, Integer awardId, Date endDateTime);
 
 }

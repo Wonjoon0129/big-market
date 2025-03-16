@@ -22,6 +22,7 @@ public interface IRaffleStrategyService {
      * @param strategyId 策略ID
      * @return 装配结果
      */
+
     Response<Boolean> strategyArmory(Long strategyId);
     /**
      * 查询策略下所有奖品列表

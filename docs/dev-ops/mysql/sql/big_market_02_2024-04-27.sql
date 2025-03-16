@@ -7,7 +7,7 @@
 #
 # 主机: 127.0.0.1 (MySQL 5.6.39)
 # 数据库: big_market_02
-# 生成时间: 2024-04-13 07:28:25 +0000
+# 生成时间: 2024-04-27 06:32:00 +0000
 # ************************************************************
 
 
@@ -19,8 +19,6 @@ SET NAMES utf8mb4;
 /*!40101 SET @OLD_SQL_MODE='NO_AUTO_VALUE_ON_ZERO', SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-CREATE database if NOT EXISTS `big_market_02` default character set utf8mb4;
-use `big_market_02`;
 
 # 转储表 raffle_activity_account
 # ------------------------------------------------------------

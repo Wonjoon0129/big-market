@@ -2,7 +2,7 @@ package org.example.trigger.job;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
-import org.example.domain.strategy.service.IRaffleStock;
+import org.example.domain.strategy.service.raffle.IRaffleStock;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 

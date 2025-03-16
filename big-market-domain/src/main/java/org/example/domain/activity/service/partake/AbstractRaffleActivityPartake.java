@@ -66,9 +66,8 @@ public abstract class AbstractRaffleActivityPartake implements IRaffleActivityPa
         // 6. 保存聚合对象 - 一个领域内的一个聚合是一个事务操作
         activityRepository.saveCreatePartakeOrderAggregate(createPartakeOrderAggregate);
 
-
-
-        return null;
+        // 7. 返回订单信息
+        return userRaffleOrder;
     }
 
     @Override

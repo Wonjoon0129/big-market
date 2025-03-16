@@ -4,17 +4,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.example.domain.strategy.model.entity.RaffleAwardEntity;
 import org.example.domain.strategy.model.entity.RaffleFactorEntity;
-import org.example.domain.strategy.model.entity.RuleActionEntity;
 import org.example.domain.strategy.model.entity.StrategyAwardEntity;
-import org.example.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
-import org.example.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
 import org.example.domain.strategy.repository.IStrategyRepository;
 import org.example.domain.strategy.service.armory.IStrategyDispatch;
-import org.example.domain.strategy.service.rule.chain.ILogicChain;
+import org.example.domain.strategy.service.raffle.IRaffleStrategy;
 import org.example.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
 import org.example.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 import org.example.types.enums.ResponseCode;
 import org.example.types.exception.AppException;
+
+import java.util.Date;
 
 /**
  * @ClassName AbstractRaffleStrategy
@@ -24,7 +23,7 @@ import org.example.types.exception.AppException;
  * @Version 1.0
  */
 @Slf4j
-public abstract class AbstractRaffleStrategy implements IRaffleStrategy{
+public abstract class AbstractRaffleStrategy implements IRaffleStrategy {
 
     // 策略仓储服务 -> domain层像一个大厨，仓储层提供米面粮油
     protected IStrategyRepository repository;
@@ -59,7 +58,7 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy{
         }
 
         // 3. 规则树抽奖过滤【奖品ID，会根据抽奖次数判断、库存判断、兜底兜里返回最终的可获得奖品信息】
-        DefaultTreeFactory.StrategyAwardVO treeStrategyAwardVO = raffleLogicTree(userId, strategyId, chainStrategyAwardVO.getAwardId());
+        DefaultTreeFactory.StrategyAwardVO treeStrategyAwardVO = raffleLogicTree(userId, strategyId, chainStrategyAwardVO.getAwardId(),raffleFactorEntity.getEndDateTime());
         log.info("抽奖策略计算-规则树 {} {} {} {}", userId, strategyId, treeStrategyAwardVO.getAwardId(), treeStrategyAwardVO.getAwardRuleValue());
 
 
@@ -67,6 +66,7 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy{
         return buildRaffleAwardEntity(strategyId, treeStrategyAwardVO.getAwardId(), treeStrategyAwardVO.getAwardRuleValue());
 
     }
+
 
     private RaffleAwardEntity buildRaffleAwardEntity(Long strategyId, Integer awardId,String awardConfig){
         StrategyAwardEntity strategyAward=repository.queryStrategyAwardEntity(strategyId,awardId);
@@ -96,6 +96,7 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy{
      * @return 过滤结果【奖品ID，会根据抽奖次数判断、库存判断、兜底兜里返回最终的可获得奖品信息】
      */
     public abstract DefaultTreeFactory.StrategyAwardVO raffleLogicTree(String userId, Long strategyId, Integer awardId);
+    public abstract DefaultTreeFactory.StrategyAwardVO raffleLogicTree(String userId, Long strategyId, Integer awardId, Date endDateTime);
 
 
 }
