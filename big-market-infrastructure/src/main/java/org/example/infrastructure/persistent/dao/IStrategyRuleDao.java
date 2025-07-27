@@ -4,7 +4,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.example.infrastructure.persistent.po.StrategyAward;
 import org.example.infrastructure.persistent.po.StrategyRule;
 
-import javax.xml.soap.SAAJResult;
 import java.util.List;
 
 @Mapper

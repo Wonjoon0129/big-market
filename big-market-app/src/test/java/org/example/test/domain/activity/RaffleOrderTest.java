@@ -57,7 +57,7 @@ public class RaffleOrderTest {
         for (int i = 0; i < 1; i++) {
             try {
                 SkuRechargeEntity skuRechargeEntity = new SkuRechargeEntity();
-                skuRechargeEntity.setUserId("kimwonjoon");
+                skuRechargeEntity.setUserId("xiaofuge");
                 skuRechargeEntity.setSku(9011L);
                 // outBusinessNo 作为幂等仿重使用，同一个业务单号2次使用会抛出索引冲突 Duplicate entry '700091009111' for key 'uq_out_business_no' 确保唯一性。
                 skuRechargeEntity.setOutBusinessNo(RandomStringUtils.randomNumeric(12));

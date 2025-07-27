@@ -34,6 +34,7 @@ import java.util.Map;
         public DefaultActivityChainFactory(Map<String, IActionChain> actionChainGroup) {
             actionChain = actionChainGroup.get(ActionModel.activity_base_action.code);
             actionChain.appendNext(actionChainGroup.get(ActionModel.activity_sku_stock_action.getCode()));
+
         }
 
         public IActionChain openActionChain() {

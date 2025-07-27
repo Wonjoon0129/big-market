@@ -3,6 +3,7 @@ package org.example.infrastructure.persistent.repository;
 import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
+import org.example.domain.activity.model.entity.ActivityAccountEntity;
 import org.example.domain.rebate.model.aggregate.BehaviorRebateAggregate;
 import org.example.domain.rebate.model.entity.BehaviorRebateOrderEntity;
 import org.example.domain.rebate.model.entity.TaskEntity;
@@ -10,12 +11,8 @@ import org.example.domain.rebate.model.valobj.BehaviorTypeVO;
 import org.example.domain.rebate.model.valobj.DailyBehaviorRebateVO;
 import org.example.domain.rebate.repository.IBehaviorRebateRepository;
 import org.example.infrastructure.event.EventPublisher;
-import org.example.infrastructure.persistent.dao.IDailyBehaviorRebateDao;
-import org.example.infrastructure.persistent.dao.ITaskDao;
-import org.example.infrastructure.persistent.dao.IUserBehaviorRebateOrderDao;
-import org.example.infrastructure.persistent.po.DailyBehaviorRebate;
-import org.example.infrastructure.persistent.po.Task;
-import org.example.infrastructure.persistent.po.UserBehaviorRebateOrder;
+import org.example.infrastructure.persistent.dao.*;
+import org.example.infrastructure.persistent.po.*;
 import org.example.types.enums.ResponseCode;
 import org.example.types.exception.AppException;
 import org.springframework.dao.DuplicateKeyException;
@@ -39,6 +36,12 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
     private IDailyBehaviorRebateDao dailyBehaviorRebateDao;
     @Resource
     private IUserBehaviorRebateOrderDao userBehaviorRebateOrderDao;
+    @Resource
+    private IRaffleActivityAccountDao raffleActivityAccountDao;
+    @Resource
+    private IRaffleActivityAccountMonthDao raffleActivityAccountMonthDao;
+    @Resource
+    private IRaffleActivityAccountDayDao raffleActivityAccountDayDao;
     @Resource
     private ITaskDao taskDao;
     @Resource
@@ -78,6 +81,7 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
                         userBehaviorRebateOrder.setBehaviorType(behaviorRebateOrderEntity.getBehaviorType());
                         userBehaviorRebateOrder.setRebateDesc(behaviorRebateOrderEntity.getRebateDesc());
                         userBehaviorRebateOrder.setRebateType(behaviorRebateOrderEntity.getRebateType());
+                        userBehaviorRebateOrder.setOutBusinessNo(behaviorRebateOrderEntity.getOutBusinessNo());
                         userBehaviorRebateOrder.setRebateConfig(behaviorRebateOrderEntity.getRebateConfig());
                         userBehaviorRebateOrder.setBizId(behaviorRebateOrderEntity.getBizId());
                         userBehaviorRebateOrderDao.insert(userBehaviorRebateOrder);
@@ -121,5 +125,32 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
         }
 
     }
+
+    @Override
+    public List<BehaviorRebateOrderEntity> queryOrderByOutBusinessNo(String userId, String outBusinessNo) {
+        // 1. 请求对象
+        UserBehaviorRebateOrder userBehaviorRebateOrderReq = new UserBehaviorRebateOrder();
+        userBehaviorRebateOrderReq.setUserId(userId);
+        userBehaviorRebateOrderReq.setOutBusinessNo(outBusinessNo);
+        // 2. 查询结果
+        List<UserBehaviorRebateOrder> userBehaviorRebateOrderResList = userBehaviorRebateOrderDao.queryOrderByOutBusinessNo(userBehaviorRebateOrderReq);
+        List<BehaviorRebateOrderEntity> behaviorRebateOrderEntities = new ArrayList<>(userBehaviorRebateOrderResList.size());
+        for (UserBehaviorRebateOrder userBehaviorRebateOrder : userBehaviorRebateOrderResList) {
+            BehaviorRebateOrderEntity behaviorRebateOrderEntity = BehaviorRebateOrderEntity.builder()
+                    .userId(userBehaviorRebateOrder.getUserId())
+                    .orderId(userBehaviorRebateOrder.getOrderId())
+                    .behaviorType(userBehaviorRebateOrder.getBehaviorType())
+                    .rebateDesc(userBehaviorRebateOrder.getRebateDesc())
+                    .rebateType(userBehaviorRebateOrder.getRebateType())
+                    .rebateConfig(userBehaviorRebateOrder.getRebateConfig())
+                    .outBusinessNo(userBehaviorRebateOrder.getOutBusinessNo())
+                    .bizId(userBehaviorRebateOrder.getBizId())
+                    .build();
+            behaviorRebateOrderEntities.add(behaviorRebateOrderEntity);
+        }
+        return behaviorRebateOrderEntities;
+    }
+
+
 
 }

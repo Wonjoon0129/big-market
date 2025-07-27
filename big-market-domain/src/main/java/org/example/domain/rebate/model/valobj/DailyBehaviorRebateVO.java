@@ -21,5 +21,6 @@ public class DailyBehaviorRebateVO {
     private String rebateType;
     /** 返利配置 */
     private String rebateConfig;
+    
 
 }
