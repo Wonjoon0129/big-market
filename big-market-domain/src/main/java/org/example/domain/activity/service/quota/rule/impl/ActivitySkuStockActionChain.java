@@ -42,9 +42,10 @@ public class ActivitySkuStockActionChain extends AbstractActionChain {
                     .build());
 
             return true;
+        }else{
+            throw new AppException(ResponseCode.ACTIVITY_SKU_STOCK_ERROR.getCode(), ResponseCode.ACTIVITY_SKU_STOCK_ERROR.getInfo());
         }
 
-        throw new AppException(ResponseCode.ACTIVITY_SKU_STOCK_ERROR.getCode(), ResponseCode.ACTIVITY_SKU_STOCK_ERROR.getInfo());
     }
 
 }
