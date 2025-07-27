@@ -103,7 +103,7 @@ services:
       RABBITMQ_DEFAULT_PASS: admin
     command: rabbitmq-server
     volumes:
-      - ./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - ./rabbitmq/enabled_plugins :/etc/rabbitmq/enabled_plugins
 
 
 
