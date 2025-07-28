@@ -7,10 +7,12 @@ import org.example.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 import org.example.domain.activity.model.valobj.OrderStateVO;
 import org.example.domain.activity.repository.IActivityRepository;
 import org.example.domain.activity.service.IRaffleActivitySkuStockService;
+import org.example.domain.activity.service.quota.policy.ITradePolicy;
 import org.example.domain.activity.service.quota.rule.factory.DefaultActivityChainFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @author Fuzhengwei bugstack.cn @小傅哥
@@ -21,13 +23,8 @@ import java.util.Date;
 public class RaffleActivityAccountQuotaService extends AbstractRaffleActivityAccountQuota implements IRaffleActivitySkuStockService {
 
 
-    public RaffleActivityAccountQuotaService(IActivityRepository activityRepository, DefaultActivityChainFactory defaultActivityChainFactory) {
-        super(activityRepository, defaultActivityChainFactory);
-    }
-
-    @Override
-    protected void doSaveOrder(CreateQuotaOrderAggregate createQuotaOrderAggregate) {
-        activityRepository.saveOrder(createQuotaOrderAggregate);
+    public RaffleActivityAccountQuotaService(IActivityRepository activityRepository, DefaultActivityChainFactory defaultActivityChainFactory, Map<String, ITradePolicy> tradePolicyGroup) {
+        super(activityRepository, defaultActivityChainFactory, tradePolicyGroup);
     }
 
     @Override
@@ -45,7 +42,6 @@ public class RaffleActivityAccountQuotaService extends AbstractRaffleActivityAcc
         activityOrderEntity.setTotalCount(activityCountEntity.getTotalCount());
         activityOrderEntity.setDayCount(activityCountEntity.getDayCount());
         activityOrderEntity.setMonthCount(activityCountEntity.getMonthCount());
-        activityOrderEntity.setState(OrderStateVO.completed);
         activityOrderEntity.setOutBusinessNo(skuRechargeEntity.getOutBusinessNo());
 
         // 构建聚合对象
@@ -79,6 +75,12 @@ public class RaffleActivityAccountQuotaService extends AbstractRaffleActivityAcc
     public void clearActivitySkuStock(Long sku) {
         activityRepository.clearActivitySkuStock(sku);
     }
+
+    @Override
+    public void updateOrder(DeliveryOrderEntity deliveryOrderEntity) {
+        activityRepository.updateOrder(deliveryOrderEntity);
+    }
+
 
     @Override
     public Integer queryRaffleActivityAccountDayPartakeCount(Long activityId, String userId) {

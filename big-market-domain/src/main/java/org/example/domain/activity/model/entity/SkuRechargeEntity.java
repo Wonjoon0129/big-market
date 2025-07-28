@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.domain.activity.model.valobj.OrderTradeTypeVO;
 
 /**
  * @author Fuzhengwei bugstack.cn @小傅哥
@@ -22,5 +23,8 @@ public class SkuRechargeEntity {
     private Long sku;
     /** 外部业务号 */
     private String outBusinessNo;
+    /** 用户ID */
+    private OrderTradeTypeVO orderTradeType = OrderTradeTypeVO.rebate_no_pay_trade;
+
 
 }

@@ -2,6 +2,7 @@ package org.example.infrastructure.persistent.po;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -31,7 +32,10 @@ public class RaffleActivityOrder {
      * 活动ID
      */
     private Long activityId;
-
+    /**
+     * 支付金额【积分】
+     */
+    private BigDecimal payAmount;
     /**
      * 活动名称
      */
