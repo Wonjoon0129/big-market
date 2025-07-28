@@ -13,4 +13,6 @@ import org.example.infrastructure.persistent.po.UserAwardRecord;
 @Mapper
 public interface IUserAwardRecordDao {
     void insert(UserAwardRecord userAwardRecord);
+
+    int updateAwardRecordCompletedState(UserAwardRecord userAwardRecordReq);
 }
