@@ -22,4 +22,6 @@ public interface IRaffleActivityAccountDao {
     void updateActivityAccountDaySurplusImageQuota(RaffleActivityAccount build);
     @DBRouter
     RaffleActivityAccount queryActivityAccountByUserId(RaffleActivityAccount raffleActivityAccountReq);
+
+    RaffleActivityAccount queryAccountByUserId(RaffleActivityAccount raffleActivityAccount);
 }

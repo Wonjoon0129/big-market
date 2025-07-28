@@ -61,5 +61,11 @@
         from raffle_activity_account
         where user_id = #{userId} and activity_id = #{activityId}
     </select>
+    <select id="queryAccountByUserId" parameterType="org.example.infrastructure.persistent.po.RaffleActivityAccount" resultMap="dataMap">
+        select  user_id, activity_id, total_count, total_count_surplus, day_count,
+                day_count_surplus, month_count, month_count_surplus
+        from raffle_activity_account
+        where user_id = #{userId} and activity_id = #{activityId}
+    </select>
 
 </mapper>
