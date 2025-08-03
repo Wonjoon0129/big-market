@@ -2,14 +2,23 @@ server:
   port: 8091
   tomcat:
     threads:
-      max: 200
-      min-spare: 50
-    accept-count: 10
+      max: 200        # 设定处理客户请求的线程的最大数目，决定了服务器可以同时响应客户请求的数,默认200
+      min-spare: 50   # 初始化线程数,最小空闲线程数,默认是10
+    accept-count: 10  # 等待队列长度
+
+# 应用配置
+app:
+  config:
+    # 版本，方便通过接口版本升级
+    api-version: v1
+    # 跨域，开发阶段可以设置为 * 不限制
+    cross-origin: '*'
+
 # Spring 配置；rabbitmq
 spring:
   rabbitmq:
-    addresses: 60.204.240.211
-    port: 15672
+    addresses: 117.72.40.188
+    port: 5672
     username: admin
     password: admin
     listener:
@@ -21,11 +30,6 @@ spring:
       send_rebate: send_rebate
       credit_adjust_success: credit_adjust_success
 
-#应用配置
-app:
-  config:
-    api-version: v1
-    cross-origin: "*"
 # 线程池配置
 thread:
   pool:
@@ -50,7 +54,7 @@ mini-db-router:
       list: db01,db02
       db00:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://60.204.240.211:13306/big_market?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
+        url: jdbc:mysql://117.72.40.188:13306/big_market?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
         username: root
         password: 123456
         type-class-name: com.zaxxer.hikari.HikariDataSource
@@ -65,7 +69,7 @@ mini-db-router:
           connection-test-query: SELECT 1
       db01:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://60.204.240.211:13306/big_market_01?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
+        url: jdbc:mysql://117.72.40.188:13306/big_market_01?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
         username: root
         password: 123456
         type-class-name: com.zaxxer.hikari.HikariDataSource
@@ -80,7 +84,7 @@ mini-db-router:
           connection-test-query: SELECT 1
       db02:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://60.204.240.211:13306/big_market_02?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
+        url: jdbc:mysql://117.72.40.188:13306/big_market_02?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
         username: root
         password: 123456
         type-class-name: com.zaxxer.hikari.HikariDataSource
@@ -94,8 +98,6 @@ mini-db-router:
           connection-timeout: 30000 #数据库连接超时时间,默认30秒，即30000
           connection-test-query: SELECT 1
 
-
-# MyBatis 配置【如需使用记得打开】
 mybatis:
   mapper-locations: classpath:/mybatis/mapper/*.xml
   config-location:  classpath:/mybatis/config/mybatis-config.xml
@@ -104,7 +106,7 @@ mybatis:
 redis:
   sdk:
     config:
-      host: 60.204.240.211
+      host: 117.72.40.188
       port: 16379
       pool-size: 10
       min-idle-size: 5
@@ -114,6 +116,18 @@ redis:
       retry-interval: 1000
       ping-interval: 60000
       keep-alive: true
+
+dubbo:
+  application:
+    name: big-market
+    version: 1.0
+  registry:
+    address: nacos://117.72.40.188:8848
+  protocol:
+    name: dubbo
+    port: -1
+  scan:
+    base-packages: org.example.trigger.api
 
 # 日志
 logging:
