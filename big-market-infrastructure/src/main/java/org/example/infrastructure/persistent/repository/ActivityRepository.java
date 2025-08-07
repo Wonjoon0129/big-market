@@ -91,7 +91,7 @@ public class ActivityRepository implements IActivityRepository {
         // 从库中获取数据
         RaffleActivity raffleActivity = raffleActivityDao.queryRaffleActivityByActivityId(activityId);
         activityEntity = ActivityEntity.builder()
-                .activityId(raffleActivity.getActivityId())
+                    .activityId(raffleActivity.getActivityId())
                 .activityName(raffleActivity.getActivityName())
                 .activityDesc(raffleActivity.getActivityDesc())
                 .beginDateTime(raffleActivity.getBeginDateTime())

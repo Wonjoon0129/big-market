@@ -78,7 +78,7 @@ public class AwardService implements IAwardService {
 
         if (null == distributeAward) {
             log.error("分发奖品，对应的服务不存在。awardKey:{}", awardKey);
-            throw new RuntimeException("分发奖品，奖品" + awardKey + "对应的服务不存在");
+//            throw new RuntimeException("分发奖品，奖品" + awardKey + "对应的服务不存在");
         }
 
         // 发放奖品

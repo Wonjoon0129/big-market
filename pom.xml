@@ -181,6 +181,11 @@
                 <artifactId>redisson-spring-boot-starter</artifactId>
                 <version>3.26.0</version>
             </dependency>
+            <dependency>
+                <groupId>com.netflix.hystrix</groupId>
+                <artifactId>hystrix-javanica</artifactId>
+                <version>1.5.18</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
