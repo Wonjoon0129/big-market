@@ -23,7 +23,7 @@ import java.util.Map;
 public interface IStrategyRepository {
     List<StrategyAwardEntity> queryStrategyAwardList(Long strategyId);
 
-    void storeStrategyAwardSearchTables(String key, Integer rateRange, Map<Integer, Integer> shuffleStrategyAwardSearchRateTables);
+    <K, V> Map<K, V> getMap(String key);
 
     int getRateRange(Long strategyId);
 
@@ -47,8 +47,6 @@ public interface IStrategyRepository {
 
     void cacheStrategyAwardCount(String cacheKey, Integer awardCount);
 
-    Boolean subtractionAwardStock(String cacheKey, Integer awardId);
-
     /**
      * 写入奖品库存消费队列
      *
@@ -68,9 +66,43 @@ public interface IStrategyRepository {
 
     Map<String, Integer> queryAwardRuleLockCOunt(String[] treeIds);
 
-    Boolean subtractionAwardStock(String cacheKey, Integer awardId, Date endDateTime);
-
     Integer queryActivityAccountTotalUseCount(String userId, Long strategyId);
 
     List<RuleWeightVO> queryAwardRuleWeight(Long strategyId);
+
+    <K, V> void storeStrategyAwardSearchRateTable(String key, Integer rateRange, Map<K, V> strategyAwardSearchRateTable);
+
+    /**
+     * 存储抽奖策略对应的Bean算法
+     *
+     * @param key      策略ID
+     * @param beanName 策略对象名称
+     */
+    void cacheStrategyArmoryAlgorithm(String key, String beanName);
+
+    /**
+     * 获取存储抽奖策略对应的Bean算法
+     *
+     * @param key 策略ID
+     * @return 策略对象名称
+     */
+    String queryStrategyArmoryAlgorithmFromCache(String key);
+
+    /**
+     * 缓存key，decr 方式扣减库存
+     *
+     * @param cacheKey 缓存Key
+     * @return 扣减结果
+     */
+    Boolean subtractionAwardStock(String cacheKey);
+
+    /**
+     * 缓存key，decr 方式扣减库存
+     *
+     * @param cacheKey    缓存Key
+     * @param endDateTime 活动结束时间
+     * @return 扣减结果
+     */
+    Boolean subtractionAwardStock(String cacheKey, Date endDateTime);
+
 }
